@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<base href="/">
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="theme-color" content="#000000">
+
+		<title>mode13h</title>
+
+		<style type="text/css">
+
+			body {
+				margin: 0;
+				padding: 0;
+				background: #000;
+				overflow: hidden;
+			}
+
+			#root {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			canvas {
+				image-rendering: pixelated;
+				image-rendering: -moz-crisp-edges;
+  				image-rendering: crisp-edges;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="root">
+			<div id="inner"></div>
+		</div>
+
+		<script src="mode13h/mode13h.js"></script>
+		<script>
+
+		var mode13h;
+		var stars = [];
+
+		init();
+
+		function init() {
+			mode13h = new Mode13h();
+			document.getElementById("inner").appendChild(mode13h.canvas);
+			fitToScreen(mode13h.canvas);
+
+			for (var i = 0; i < 64; i++) {
+				mode13h.setPaletteColor(i, 0, 0, Math.floor(i * 4));
+				mode13h.setPaletteColor(i + 64, 0, Math.floor(i * 4), 255);
+				mode13h.setPaletteColor(i + 128, 0 + Math.floor(i * 4), 255, 255);
+			}
+
+			mode13h.clear();
+
+			requestAnimationFrame(draw);
+		}
+
+		function fitToScreen(canvas) {
+			if (window.innerWidth > window.innerHeight) {
+				canvas.style.width = Math.floor(window.innerHeight * 1.6) + "px";
+				canvas.style.height = window.innerHeight + "px";
+			} else {
+				canvas.style.width = window.innerWidth + "px";
+				canvas.style.height = Math.floor(window.innerWidth / 1.6) + "px";
+			}
+		}
+
+		function draw() {
+			fire();
+
+			var i = 0;
+			while (i < stars.length) {
+				var star = stars[i];
+
+				mode13h.putPixel(star.x, star.y, star.color);
+
+				star.x += star.dx;
+				star.y += star.dy;
+				star.dx *= 1.01;
+				star.dy *= 1.01;
+
+				star.color += 3;
+				if (star.color > 191) {
+					star.color = 191;
+				}
+
+				if (star.x < 1 || star.x > 318 || star.y < 1 || star.y > 198) {
+					stars.splice(i, 1);
+				} else {
+					i++;
+				}
+			}
+
+			while (stars.length < 1000) {
+				var newStar = {
+					x: 160,
+					y: 100,
+					color: 0,
+					dx: Math.random() * 2 - 1,
+					dy: Math.random() * 2 - 1
+				};
+
+				stars.push(newStar);
+			}
+
+			mode13h.flip();
+			requestAnimationFrame(draw);
+		}
+
+		function line(p0, p1) {
+			var x, y, dx, dy, e, ys, ok;
+
+			var x1 = Math.floor(p0.x);
+			var y1 = Math.floor(p0.y);
+			var x2 = Math.floor(p1.x);
+			var y2 = Math.floor(p1.y);
+
+			ok = Math.abs(y2 - y1) > Math.abs(x2 - x1);
+			if (ok) {
+				x = x1;
+				x1 = y1;
+				y1 = x;
+				x = x2;
+				x2 = y2;
+				y2 = x;
+			}
+			if (x1 > x2) {
+				x = x1;
+				x1 = x2;
+				x2 = x;
+				x = y2;
+				y2 = y1;
+				y1 = x;
+			}
+
+			dx = x2 - x1;
+			dy = Math.abs(y2 - y1);
+			e = 0;
+			y = y1;
+
+			if (y1 < y2) {
+				ys = 1;
+			} else {
+				ys = -1;
+			}
+
+			if (ok) {
+				for (x = x1; x <= x2; x++) {
+					mode13h.putPixel(y, x, Math.floor(Math.random() * 192));
+					e += dy;
+					if (e * 2 >= dx) {
+						y += ys;
+						e -= dx;
+					}
+				}
+			}
+			else {
+				for (x = x1; x <= x2; x++) {
+					mode13h.putPixel(x, y, Math.floor(Math.random() * 192));
+					e += dy;
+					if (e * 2 >= dx) {
+						y += ys;
+						e -= dx;
+					}
+				}
+			}
+		}
+
+		function fire() {
+			for (var y = 0; y < 199; y++) {
+				for (var x = 1; x < 319; x++) {
+					var bottom = mode13h.getPixel(x, y + 1);
+					var left = mode13h.getPixel(x - 1, y);
+					var current = mode13h.getPixel(x, y);
+					var right = mode13h.getPixel(x + 1, y);
+
+					var value = Math.floor((bottom + left + current + right) / 4.25);
+					mode13h.putPixel(x, y, value);
+				}
+			}
+		}
+
+		</script>
+	</body>
+</html>
