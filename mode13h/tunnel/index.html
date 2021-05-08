@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<base href="/">
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="theme-color" content="#000000">
+
+		<title>mode13h</title>
+
+		<style type="text/css">
+
+			body {
+				margin: 0;
+				padding: 0;
+				background: #000;
+				overflow: hidden;
+				font-family: Arial, Helvetica, sans-serif;
+			}
+
+			#root {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			#reference {
+				position: fixed;
+				right: 0;
+				bottom: 0;
+				background: #000;
+				color: #fff;
+				padding: 5px;
+			}
+
+			canvas {
+				image-rendering: pixelated;
+				image-rendering: -moz-crisp-edges;
+  				image-rendering: crisp-edges;
+			}
+
+			a {
+				color: #fff;
+				text-decoration: none;
+				font-weight: bold;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="root">
+			<div id="inner"></div>
+			<div id="reference">
+				inspired by <a target="_blank" href="https://lodev.org/cgtutor/tunnel.html">Lode's Computer Graphics Tutorial</a>
+			</div>
+		</div>
+
+		<script src="../mode13h.js"></script>
+		<script>
+
+		const TextureSize = 128;
+
+		let mode13h;
+		let texture;
+		let angles;
+		let distances;
+
+		let shift = 0;
+
+		init();
+
+		function init() {
+			mode13h = new Mode13h();
+			document.getElementById("inner").appendChild(mode13h.canvas);
+			fitToScreen(mode13h.canvas);
+
+			initPalette();
+			initTexture();
+			initTables();
+			mode13h.clear();
+			requestAnimationFrame(draw);
+		}
+
+		function draw() {
+			for (let y = 0; y < 199; y++) {
+				for (let x = 0; x < 319; x++) {
+					const angle = angles[y][x];
+					const distance = distances[y][x];
+
+					const tx = Math.floor((distance + shift) % TextureSize);
+					const ty = Math.floor((angle + shift) % TextureSize);
+
+					mode13h.putPixel(x, y, texture[ty][tx]);
+				}
+			}
+
+			shift++;
+			shift %= TextureSize;
+
+			mode13h.flip();
+			requestAnimationFrame(draw);
+		}
+
+		function initPalette() {
+			for (var i = 0; i < 64; i++) {
+				mode13h.setPaletteColor(i, 0, Math.floor(i * 4), 0);
+				mode13h.setPaletteColor(i + 64, Math.floor(i * 4), 255, Math.floor(i * 4));
+			}
+		}
+
+		function initTexture() {
+			texture = [];
+
+			for (let y = 0; y < TextureSize; y++) {
+				const row = [];
+
+				for (let x = 0; x < TextureSize; x++) {
+					row.push((x ^ y) % 128);
+				}
+
+				texture.push(row);
+			}
+		}
+
+		function initTables() {
+			const CenterX = 160;
+			const CenterY = 100;
+			const Ratio = 32;
+
+			angles = [];
+			distances = [];
+
+			for (let y = 0; y < 199; y++) {
+				const angleRow = [];
+				const distanceRow = [];
+
+				for (let x = 0; x < 319; x++) {
+					const angle = Math.floor(0.5 * TextureSize * Math.atan2(x - CenterX, y - CenterY) / Math.PI + 0.5 * TextureSize);
+					const distance = Math.floor(Ratio * TextureSize / Math.sqrt((x - CenterX) * (x - CenterX) + (y - CenterY) * (y - CenterY)) % TextureSize);
+
+					angleRow.push(angle);
+					distanceRow.push(distance);
+				}
+
+				angles.push(angleRow);
+				distances.push(distanceRow);
+			}
+
+			distances[CenterY][CenterX] = 0;
+		}
+
+		function fitToScreen(canvas) {
+			if (window.innerWidth > window.innerHeight) {
+				canvas.style.width = Math.floor(window.innerHeight * 1.6) + "px";
+				canvas.style.height = window.innerHeight + "px";
+			} else {
+				canvas.style.width = window.innerWidth + "px";
+				canvas.style.height = Math.floor(window.innerWidth / 1.6) + "px";
+			}
+		}
+
+		</script>
+	</body>
+</html>
