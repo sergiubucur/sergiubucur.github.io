@@ -1,353 +1,346 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="theme-color" content="#000000">
-		<meta property="og:title" content="The Art of Sergiu Valentin Bucur">
-		<meta property="og:image" content="https://sergiubucur.github.io/images/og.png">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <meta property="og:title" content="The Art of Sergiu Valentin Bucur" />
+    <meta
+      property="og:image"
+      content="https://sergiubucur.github.io/images/og.png"
+    />
 
-		<title>Sergiu Valentin Bucur</title>
+    <title>Sergiu Valentin Bucur</title>
 
-		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+    />
 
-		<style>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
 
-			* {
-				box-sizing: border-box;
-			}
+      body {
+        margin: 0;
+        padding: 0;
+        background: #ffffff;
+        color: #000000;
+        font-family: "Roboto", Arial, Helvetica, sans-serif;
+      }
 
-			body {
-				margin: 0;
-				padding: 0;
-				background: #282828;
-				color: #ffffff;
-				font-family: "Roboto", Arial, Helvetica, sans-serif;
-				text-shadow: 0px 2px 2px #000000;
-			}
+      .header {
+        display: flex;
+      }
 
-			.header {
-				position: fixed;
-				width: 100%;
-				top: 0;
-				left: 0;
-				display: flex;
-				border-bottom: 1px solid #ffffff;
-				background: rgb(20,40,80);
-				background: linear-gradient(60deg, rgba(2,8,18,1) 0%, rgba(20,40,80,1) 50%, rgba(2,8,18,1) 100%);
-				box-shadow: 0px 0px 10px 0px rgba(0,0,0,1);
-			}
+      .header .left {
+        flex-grow: 1;
+        padding: 32px;
+        width: 50%;
+        text-align: right;
+      }
 
-			.header .left {
-				flex-grow: 1;
-				padding: 32px;
-			}
+      .header .left .supertitle {
+        font-size: 20px;
+        color: #000000;
+      }
 
-			.header .left .supertitle {
-				font-size: 20px;
-				color: #cccccc;
-			}
+      .header .left .title {
+        font-size: 32px;
+        color: #000000;
+      }
 
-			.header .left .title {
-				font-size: 32px;
-				color: #ffffff;
-			}
+      .header .right {
+        width: 50%;
+        padding: 32px;
+        padding-top: 24px;
+        padding-bottom: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        font-size: 16px;
+      }
 
-			.header .right {
-				width: 100px;
-				padding: 32px;
-				padding-top: 24px;
-				padding-bottom: 24px;
-				display: flex;
-				flex-direction: column;
-				justify-content: space-between;
-				align-items: flex-end;
-				font-size: 16px;
-			}
+      .header .right a,
+      .header .right a:visited,
+      .header .right a:hover,
+      .header .right a:active {
+        color: #000000;
+        text-decoration: none;
+        text-shadow: none;
+      }
 
-			.header .right a, .header .right a:visited, .header .right a:hover, .header .right a:active {
-				color: #ffffff;
-				text-decoration: none;
-				text-shadow: none;
-			}
+      .header .right a:hover {
+        text-decoration: underline;
+      }
 
-			.header .right a:hover {
-				text-decoration: underline;
-			}
+      .content {
+        padding-bottom: 64px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
 
-			.content {
-				margin-top: 126px;
-				padding-bottom: 64px;
-				display: flex;
-				flex-wrap: wrap;
-				justify-content: center;
-				background: rgb(80,80,80);
-				background: linear-gradient(60deg, rgba(18,18,18,1) 0%, rgba(80,80,80,1) 50%, rgba(18,18,18,1) 100%);
-				background-attachment: fixed;
-			}
+      .content a,
+      .content a:visited,
+      .content a:hover,
+      .content a:active {
+        text-decoration: none;
+      }
 
-			.content a, .content a:visited, .content a:hover, .content a:active {
-				text-decoration: none;
-			}
+      .piece {
+        padding: 32px;
+      }
 
-			.piece {
-				padding: 32px;
-			}
+      .piece img {
+        width: 480px;
+        height: 270px;
+        margin-bottom: 16px;
+        border-radius: 16px;
+      }
 
-			.piece img {
-				width: 480px;
-				height: 270px;
-				margin-bottom: 16px;
-				outline: 1px solid #ffffff;
-				box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.75);
-			}
+      .piece .caption .title {
+        font-size: 24px;
+        color: #000000;
+      }
 
-			.piece .caption .title {
-				font-size: 24px;
-				color: #ffffff;
-			}
+      .piece .caption .subtitle {
+        margin-top: 8px;
+        font-size: 16px;
+        color: #000000;
+      }
 
-			.piece .caption .subtitle {
-				margin-top: 8px;
-				font-size: 16px;
-				color: #cccccc;
-			}
+      @media only screen and (max-width: 600px) {
+        .header {
+          flex-direction: column;
+          border: 0;
+        }
 
-			@media only screen and (max-width: 600px) {
-				.header {
-					flex-direction: column;
-					border: 0;
-				}
+        .header .left {
+          padding-bottom: 0;
+          padding: 16px;
+          width: auto;
+          text-align: center;
+        }
 
-				.header .left {
-					padding-bottom: 0;
-					padding: 16px;
-				}
+        .header .left .title {
+          font-size: 28px;
+        }
 
-				.header .left .title {
-					font-size: 28px;
-				}
+        .header .right {
+          padding: 16px;
+          width: auto;
+          flex-direction: row;
+          justify-content: center;
+        }
 
-				.header .right {
-					padding: 16px;
-					width: auto;
-					flex-direction: row;
-					justify-content: flex-end;
-				}
+        .header .right a {
+          margin-left: 8px;
+        }
 
-				.header .right a {
-					margin-left: 8px;
-				}
+        .piece {
+          padding: 0;
+        }
 
-				.content {
-					margin-top: 142px;
-				}
+        .piece img {
+          width: 100%;
+          height: auto;
+          border: 0;
+          outline: 0;
+          margin: 0;
+        }
 
-				.piece {
-					padding: 0;
-				}
+        .piece .caption {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
 
-				.piece img {
-					width: 100%;
-					height: auto;
-					border: 0;
-					outline: 0;
-					margin: 0;
-				}
+  <body>
+    <div class="header">
+      <div class="left">
+        <div class="supertitle">The Art of</div>
+        <div class="title">Sergiu Valentin Bucur</div>
+      </div>
+      <div class="right">
+        <a href="https://sergiubucur.github.io/cv">CV</a>
+        <a href="https://github.com/sergiubucur">GitHub</a>
+        <a href="https://www.linkedin.com/in/sergiubucur">LinkedIn</a>
+      </div>
+    </div>
 
-				.piece .caption {
-					padding: 16px;
-				}
-			}
+    <div class="content">
+      <div class="piece">
+        <a href="https://gorescript.github.io">
+          <img src="images_small/2016_2017/1_gorescript/8.jpg" />
+        </a>
 
-		</style>
-	</head>
+        <div class="caption">
+          <div class="title">Gorescript</div>
+          <div class="subtitle">C++, 2017</div>
+        </div>
+      </div>
 
-	<body>
+      <div class="piece">
+        <a href="https://gorescript.github.io/classic">
+          <img src="images_small/2014_2015/4_gorescript_classic/2.jpg" />
+        </a>
 
-		<div class="header">
-			<div class="left">
-				<div class="supertitle">
-					The Art of
-				</div>
-				<div class="title">
-					Sergiu Valentin Bucur
-				</div>
-			</div>
-			<div class="right">
-				<a href="https://sergiubucur.github.io/cv">CV</a>
-				<a href="https://github.com/sergiubucur">GitHub</a>
-				<a href="https://www.linkedin.com/in/sergiubucur">LinkedIn</a>
-			</div>
-		</div>
+        <div class="caption">
+          <div class="title">Gorescript Classic</div>
+          <div class="subtitle">JavaScript, 2014</div>
+        </div>
+      </div>
 
-		<div class="content">
-			<div class="piece">
-				<a href="https://gorescript.github.io">
-					<img src="images_small/2016_2017/1_gorescript/8.jpg" />
-				</a>
+      <div class="piece">
+        <a href="https://sergiubucur.github.io/isometric">
+          <img src="images_small/2019/2_isometric/3.png" />
+        </a>
 
-				<div class="caption">
-					<div class="title">Gorescript</div>
-					<div class="subtitle">C++, 2017</div>
-				</div>
-			</div>
+        <div class="caption">
+          <div class="title">Isometric</div>
+          <div class="subtitle">TypeScript, 2019</div>
+        </div>
+      </div>
 
-			<div class="piece">
-				<a href="https://gorescript.github.io/classic">
-					<img src="images_small/2014_2015/4_gorescript_classic/2.jpg" />
-				</a>
+      <div class="piece">
+        <a href="https://sergiubucur.github.io/flight">
+          <img src="images_small/2019/1_flight/1.png" />
+        </a>
 
-				<div class="caption">
-					<div class="title">Gorescript Classic</div>
-					<div class="subtitle">JavaScript, 2014</div>
-				</div>
-			</div>
+        <div class="caption">
+          <div class="title">Flight</div>
+          <div class="subtitle">JavaScript, 2019</div>
+        </div>
+      </div>
 
-			<div class="piece">
-				<a href="https://sergiubucur.github.io/isometric">
-					<img src="images_small/2019/2_isometric/3.png" />
-				</a>
+      <div class="piece">
+        <a href="https://sergiubucur.itch.io/falling-through-code">
+          <img src="images_small/2018/3_falling_through_code/1.png" />
+        </a>
 
-				<div class="caption">
-					<div class="title">Isometric</div>
-					<div class="subtitle">TypeScript, 2019</div>
-				</div>
-			</div>
+        <div class="caption">
+          <div class="title">Falling Through Code</div>
+          <div class="subtitle">JavaScript, 2018</div>
+        </div>
+      </div>
 
-			<div class="piece">
-				<a href="https://sergiubucur.github.io/flight">
-					<img src="images_small/2019/1_flight/1.png" />
-				</a>
+      <div class="piece">
+        <a href="https://sergiubucur.github.io/meta-rpg">
+          <img src="images_small/2018/1_meta_rpg/1.png" />
+        </a>
 
-				<div class="caption">
-					<div class="title">Flight</div>
-					<div class="subtitle">JavaScript, 2019</div>
-				</div>
-			</div>
+        <div class="caption">
+          <div class="title">Meta RPG</div>
+          <div class="subtitle">JavaScript, 2018</div>
+        </div>
+      </div>
 
-			<div class="piece">
-				<a href="https://sergiubucur.itch.io/falling-through-code">
-					<img src="images_small/2018/3_falling_through_code/1.png" />
-				</a>
+      <div class="piece">
+        <a href="https://sergiubucur.github.io/harvester">
+          <img src="images_small/2018/2_harvester/1.png" />
+        </a>
 
-				<div class="caption">
-					<div class="title">Falling Through Code</div>
-					<div class="subtitle">JavaScript, 2018</div>
-				</div>
-			</div>
+        <div class="caption">
+          <div class="title">Harvester</div>
+          <div class="subtitle">JavaScript, 2018</div>
+        </div>
+      </div>
 
-			<div class="piece">
-				<a href="https://sergiubucur.github.io/meta-rpg">
-					<img src="images_small/2018/1_meta_rpg/1.png" />
-				</a>
+      <div class="piece">
+        <a href="images/2012_2013/2_paracosm/5.jpg">
+          <img src="images_small/2012_2013/2_paracosm/5.jpg" />
+        </a>
 
-				<div class="caption">
-					<div class="title">Meta RPG</div>
-					<div class="subtitle">JavaScript, 2018</div>
-				</div>
-			</div>
+        <div class="caption">
+          <div class="title">Paracosm</div>
+          <div class="subtitle">C#, 2013</div>
+        </div>
+      </div>
 
-			<div class="piece">
-				<a href="https://sergiubucur.github.io/harvester">
-					<img src="images_small/2018/2_harvester/1.png" />
-				</a>
+      <div class="piece">
+        <a href="images/2012_2013/1_space_turret/3.jpg">
+          <img src="images_small/2012_2013/1_space_turret/3.jpg" />
+        </a>
 
-				<div class="caption">
-					<div class="title">Harvester</div>
-					<div class="subtitle">JavaScript, 2018</div>
-				</div>
-			</div>
+        <div class="caption">
+          <div class="title">Space Turret</div>
+          <div class="subtitle">C#, 2012</div>
+        </div>
+      </div>
 
-			<div class="piece">
-				<a href="images/2012_2013/2_paracosm/5.jpg">
-					<img src="images_small/2012_2013/2_paracosm/5.jpg" />
-				</a>
+      <div class="piece">
+        <a href="images/2009_2011/2_wingspan/1.JPG">
+          <img src="images_small/2009_2011/2_wingspan/1.JPG" />
+        </a>
 
-				<div class="caption">
-					<div class="title">Paracosm</div>
-					<div class="subtitle">C#, 2013</div>
-				</div>
-			</div>
+        <div class="caption">
+          <div class="title">Wingspan</div>
+          <div class="subtitle">C++, 2009</div>
+        </div>
+      </div>
 
-			<div class="piece">
-				<a href="images/2012_2013/1_space_turret/3.jpg">
-					<img src="images_small/2012_2013/1_space_turret/3.jpg" />
-				</a>
+      <div class="piece">
+        <a href="images/2009_2011/1_aon/2.jpg">
+          <img src="images_small/2009_2011/1_aon/2.jpg" />
+        </a>
 
-				<div class="caption">
-					<div class="title">Space Turret</div>
-					<div class="subtitle">C#, 2012</div>
-				</div>
-			</div>
+        <div class="caption">
+          <div class="title">AON</div>
+          <div class="subtitle">C++, 2009</div>
+        </div>
+      </div>
 
-			<div class="piece">
-				<a href="images/2009_2011/2_wingspan/1.JPG">
-					<img src="images_small/2009_2011/2_wingspan/1.JPG" />
-				</a>
+      <div class="piece">
+        <a href="images/2004_2008/5_model/3.png">
+          <img src="images_small/2004_2008/5_model/3.png" />
+        </a>
 
-				<div class="caption">
-					<div class="title">Wingspan</div>
-					<div class="subtitle">C++, 2009</div>
-				</div>
-			</div>
+        <div class="caption">
+          <div class="title">3D Model Viewer</div>
+          <div class="subtitle">Pascal, 2008</div>
+        </div>
+      </div>
 
-			<div class="piece">
-				<a href="images/2009_2011/1_aon/2.jpg">
-					<img src="images_small/2009_2011/1_aon/2.jpg" />
-				</a>
+      <div class="piece">
+        <a href="images/2004_2008/3_fractals/3.png">
+          <img src="images_small/2004_2008/3_fractals/3.png" />
+        </a>
 
-				<div class="caption">
-					<div class="title">AON</div>
-					<div class="subtitle">C++, 2009</div>
-				</div>
-			</div>
+        <div class="caption">
+          <div class="title">Fractal Terrain</div>
+          <div class="subtitle">Pascal, 2008</div>
+        </div>
+      </div>
 
-			<div class="piece">
-				<a href="images/2004_2008/5_model/3.png">
-					<img src="images_small/2004_2008/5_model/3.png" />
-				</a>
+      <div class="piece">
+        <a href="images/2004_2008/4_airport_router/1.png">
+          <img src="images_small/2004_2008/4_airport_router/1.png" />
+        </a>
 
-				<div class="caption">
-					<div class="title">3D Model Viewer</div>
-					<div class="subtitle">Pascal, 2008</div>
-				</div>
-			</div>
+        <div class="caption">
+          <div class="title">Airport Router</div>
+          <div class="subtitle">Pascal, 2008</div>
+        </div>
+      </div>
 
-			<div class="piece">
-				<a href="images/2004_2008/3_fractals/3.png">
-					<img src="images_small/2004_2008/3_fractals/3.png" />
-				</a>
+      <div class="piece">
+        <a href="images/2004_2008/2_gbox/4.png">
+          <img src="images_small/2004_2008/2_gbox/4.png" />
+        </a>
 
-				<div class="caption">
-					<div class="title">Fractal Terrain</div>
-					<div class="subtitle">Pascal, 2008</div>
-				</div>
-			</div>
-
-			<div class="piece">
-				<a href="images/2004_2008/4_airport_router/1.png">
-					<img src="images_small/2004_2008/4_airport_router/1.png" />
-				</a>
-
-				<div class="caption">
-					<div class="title">Airport Router</div>
-					<div class="subtitle">Pascal, 2008</div>
-				</div>
-			</div>
-
-			<div class="piece">
-				<a href="images/2004_2008/2_gbox/4.png">
-					<img src="images_small/2004_2008/2_gbox/4.png" />
-				</a>
-
-				<div class="caption">
-					<div class="title">GBOX</div>
-					<div class="subtitle">Pascal, 2006</div>
-				</div>
-			</div>
-		</div>
-
-	</body>
+        <div class="caption">
+          <div class="title">GBOX</div>
+          <div class="subtitle">Pascal, 2006</div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
